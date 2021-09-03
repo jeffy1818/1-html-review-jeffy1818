@@ -29,7 +29,9 @@ color: #38DEF3;
 footer {
 background-color: #aaa;
 padding: 10px;
+text-align: center;
 }
 
+h3, p {color: white;}
 
 
