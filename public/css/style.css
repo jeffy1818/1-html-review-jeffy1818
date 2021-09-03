@@ -1,0 +1,35 @@
+body {
+background-color:#333333;
+}
+
+/*Changes BootStrap Default Header Color*/
+#logo {
+color: #38DEF3;
+font-family: Helvetica, sans-serif;
+font-weight: 900;
+text-align: center;
+}
+
+/*Changes Default BootStrap Background Color*/
+.navbar-default {
+background-color: black;
+}
+
+/*Changes Default BootStrap Font Color*/
+.nav.navbar-nav li a {
+color: #ffffff;
+font-size: 20px;
+}
+
+/*Changes Default BootStrap Hover Link Color*/
+.nav.navbar-nav li a:hover {
+color: #38DEF3;
+}
+
+footer {
+background-color: #aaa;
+padding: 10px;
+}
+
+
+
