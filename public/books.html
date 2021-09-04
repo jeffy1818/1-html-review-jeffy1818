@@ -20,7 +20,7 @@
     <div class="container">
 
       <!--Header ELement-->
-      <header class="row">
+      <header class="row">  
         <h1 id="logo">JEFF'S LEGIT LIBRARY</h1>
       </header>
 
@@ -48,10 +48,79 @@
       </nav>
 
       <!--Main Content-->
-      <div class="row">
+      <div class="container">
+        <table class="table table-bordered">
+            <thead>
+                <th>Title</th>
+                <th>Author</th> 
+                <th>Publish Year</th> 
+                <th>Publisher</th> 
+                <th>Page Count</th> 
+                <th>MSRP</th>
+            </thead>
 
+            <tr>
+                <td>How To Graduate Grad School</td>
+                <td>Jeff Yu</td>
+                <td>2021</td>
+                <td>McGraw-Hill Education</td>
+                <td>568</td>
+                <td>$599.99</td>
+            </tr>
 
+            <tr>
+                <td>MSIS 101</td>
+                <td>Class of 2021</td>
+                <td>2022</td>
+                <td>Penguin/Random House</td>
+                <td>897</td>
+                <td>$10,000.00</td>
+            </tr>
 
+            <tr>
+                <td>Programming for Dumbies</td>
+                <td>Anonymous Professor</td>
+                <td>2018</td>
+                <td>Harper Collins</td>
+                <td>105</td>
+                <td>$1,939.99</td>
+            </tr>
+
+            <tr>
+                <td>How to Get a Job</td>
+                <td>GCS</td>
+                <td>2021</td>
+                <td>Simon and Schuster</td>
+                <td>209</td>
+                <td>$899.99</td>
+            </tr>
+        </table>
+
+        <!--Forms-->
+        <form action="pages.php" method="post">
+            <label for="book_title">Book Title</label><br>
+            <input type="text" name="book_title" id="book_title"><br>
+            
+            <label for="Author">Author Name</label><br>
+            <input type="text" name="Author" id="Author"><br>
+            
+            <label for="Year">Publish Year</label><br>
+            <input type="text" name="Year" id="Year"><br>
+
+            <label for="Publisher">Publisher</label><br>
+            <input type="text" name="Publisher" id="Publisher"><br>
+
+            <label for="Page_number"># of Page Numbers</label><br>
+            <input type="text" name="Page_number" id="Page_number"><br>
+
+            <label for="Price">MSRP</label><br>
+            <input type="text" name="Price" id="Price"><br>
+
+            <br><br>
+            <button type="button" id="submit">Submit</button>
+            
+          </form>
+          <br>
 
       </div>
       
