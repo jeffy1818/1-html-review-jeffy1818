@@ -1,0 +1,21 @@
+{
+    "offer": [
+        {
+            "id": 1, 
+            "name": "Jeff Yu",
+            "salary": 120000, 
+            "bonus": 100,
+            "company": "Google",
+            "offerDate": "2021-10-12"
+        },
+
+        {
+            "id": 1, 
+            "name": "Miffy Lai",
+            "salary": 159999, 
+            "bonus": 10000,
+            "company": "Harvard",
+            "offerDate": "2021-05-31"
+        }
+    ]
+}
