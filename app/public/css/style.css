@@ -82,3 +82,13 @@ th[role=columnheader]:not(.no-sort):hover:after {
 	visibility: visible;
 	opacity: 1;
 }
+
+#spacer {
+	background-color: black;
+	text-align: center;
+	font-size: 25px; 
+}
+
+#RandomUser {
+	text-align: center; 
+}
