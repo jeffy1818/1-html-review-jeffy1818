@@ -41,6 +41,6 @@ function printAndEncode( $val ) {
 }
 
 // Naming Conventions for JS and PHP : camelCase
-// When naming varables, every new word becomes capitalized.
+    // When naming varables, every new word becomes capitalized.
 
 //There's also PascalCase, snake_case, and kebab-case 
