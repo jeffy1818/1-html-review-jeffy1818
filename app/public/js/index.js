@@ -1,34 +1,36 @@
-const RandomUser = {
-  data() {
-    return {
-      result: {},
+const BooksApp = {
+    data() {
+      return {
+        books: []
+      }
+    },
+    computed: {},
+    methods: {
+        prettyData(d) {
+            return dayjs(d)
+            .format('D MMM YYYY')
+        },
+        prettyDollar(n) {
+            const d = new Intl.NumberFormat("en-US").format(n);
+            return "$ " + d;
+        },
+        
+        fetchBooksData() {
+            fetch('/api/books/' )
+            .then( response => response.json() )
+            .then( (responseJson) => {
+                console.log(responseJson);
+                this.books = responseJson;
+            })
+            .catch( (err) => {
+                console.error(err);
+            });
+        },
+    },
+    created() {
+        this.fetchBooksData();
     }
-  },
-  computed: {
-      CustomDOB() {
-          /*Pulled from RandomUser, but now formatted */ 
-          return dayjs(this.result.dob.date)
-          /*Custom Formatting*/ 
-          .format('MMM D, YYYY')
-      }
-  },
-  methods: {
-      fetchUserData() {
-          fetch('https://randomuser.me/api/')
-          .then(response => response.json())
-          .then( (json) => {
-              console.log("A");
-              this.result = json.results[0];
-              console.log("C");
-          })
-          .catch( (error) => {
-              console.error(error);
-          });
-      }
-  },
-  created() {
-      this.fetchUserData();
+  
   }
-
-}
-Vue.createApp(RandomUser).mount('#RandomUser');
+  
+  Vue.createApp(BooksApp).mount('#BooksApp');
