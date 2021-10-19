@@ -53,43 +53,55 @@
           </ul>
         </div>
       </nav>
+    </div>
 
 
       <!-- Table of Books -->
-      <div id="BooksApp" class="container">
-      <h1 id="bookstable">List of Books</h1>  
-        <table class="table">
-        <thead>
-            <tr>
-              <th>ID</th>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Publish Year</th>
-              <th>Publisher</th>
-              <th>Page Count</th>
-              <th>MSRP</th>
-            </tr>
-        </thead>
-            <tbody>
-                <tr v-for="b in books">
-                    <td>{{ books.id }}</td>
-                    <td>{{ books.title }}</td>
-                    <td>{{ books.author }}</td>
-                    <td>{{ books.publishYear }}</td>
-                    <td>{{ books.publisher }}</td>
-                    <td>{{ books.pageNumber }}</td>
-                    <td>{{ prettyDollar(books.msrp) }}</td>
+      <div id="SomeApp" class="container">
+        <div class="row align-items-start">
+            <h1 id="bookstable">List of Books</h1>  
+            <table class="table">
+            <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>Publish Year</th>
+                  <th>Publisher</th>
+                  <th>Page Count</th>
+                  <th>MSRP</th>
                 </tr>
-            </tbody>
-        </table>
-    </div>
-      
-      <!--Footer Element-->
-      <footer class="row">
-        Jeffrey Yu Legit Library &copy; 2021 Copyright 
-      </footer>
+            </thead>
+                <tbody>
+                    <tr v-for="book in books">
+                        <td>{{ book.id }}</td>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.publishYear }}</td>
+                        <td>{{ book.publisher }}</td>
+                        <td>{{ book.pageNumber }}</td>
+                        <td>{{ prettyDollar(book.msrp) }}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-        <script src="js/index.js"></script>
-    </div> 
+        </div>
+
+      </div>
+
+      <div class="container">
+        <!--Footer Element-->
+        <footer class="row">
+          Jeffrey Yu Legit Library &copy; 2021 Copyright 
+        </footer>
+     
+      </div>
+      
+
+      <!-- Bootstrap Bundle with Popper -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+      <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+      
+      <script src="js/index.js"></script>
   </body>
 </html>

@@ -92,3 +92,7 @@ th[role=columnheader]:not(.no-sort):hover:after {
 #RandomUser {
 	text-align: center; 
 }
+
+#bookstable {
+	color: red !important;
+}
