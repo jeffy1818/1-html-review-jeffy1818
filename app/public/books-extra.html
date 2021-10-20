@@ -89,12 +89,53 @@
 
       </div>
 
+      <!-- Book Form -->
       <div class="container">
-        <!--Footer Element-->
+        <form v-on:submit.prevent="postNewBook">
+
+          <div class="mb-3">
+            <label for="title" class="form-label">Book Title</label>
+            <input type="text" v-model="offerForm.title" class="form-control" id="title">
+          </div>
+
+          <div class="mb-3">
+            <label for="author" class="form-label">Author Name</label>
+            <input type="text" v-model="offerForm.author" class="form-control" id="author">
+          </div>
+
+          <div class="mb-3">
+            <label for="publishYear" class="form-label">Publish Year</label>
+            <input type="number" v-model="offerForm.publishYear" class="form-control" id="publishYear">
+          </div>
+
+          <div class="mb-3">
+            <label for="publisher" class="form-label">Publisher</label>
+            <input type="text" v-model="offerForm.publisher" class="form-control" id="publisher">
+          </div>
+
+          <div class="mb-3">
+            <label for="pageNumber" class="form-label">Page Count</label>
+            <input type="number" v-model="offerForm.pageNumber" class="form-control" id="pageNumber">
+          </div>
+
+          <div class="mb-3">
+            <label for="msrp" class="form-label">MSRP</label>
+            <input type="number" v-model="offerForm.msrp" class="form-control" id="msrp">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+      </div>
+
+      <br>
+      <br> 
+
+      <!--Footer Element-->
+      <div class="container">
         <footer class="row">
           Jeffrey Yu Legit Library &copy; 2021 Copyright 
         </footer>
-     
       </div>
       
 
