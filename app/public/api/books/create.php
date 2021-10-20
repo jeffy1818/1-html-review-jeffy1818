@@ -16,7 +16,7 @@ try {
     header($_SERVER["SERVER_PROTOCOL"] . " 400 Bad Request");
     // print_r($_POST);
     // echo file_get_contents('php://input');
-    exit;
+    exit;   
 }
 
 require("class/DbConnection.php");
@@ -31,12 +31,11 @@ $db = DbConnection::getConnection();
 // Step 2: Create & run the query
 // Note the use of parameterized statements to avoid injection
 $stmt = $db->prepare(
-  'INSERT INTO books (id, title, author, publishYear, publisher, pageNumber, msrp)
-  VALUES (?, ?, ?, ?, ?, ?, ?)'
+  'INSERT INTO books (title, author, publishYear, publisher, pageNumber, msrp)
+  VALUES (?, ?, ?, ?, ?, ?)'
 );
 
 $stmt->execute([
-    $_POST['id'],
     $_POST['title'],
     $_POST['author'],
     $_POST['publishYear'],

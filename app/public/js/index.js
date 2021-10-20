@@ -43,10 +43,11 @@ const SomeApp = {
                 // reset the form
                 this.bookForm = {};
               });
-        },
+        }
     },
     created() {
         this.fetchBooksData();
+        // this.postNewBook();
     }
   
   }

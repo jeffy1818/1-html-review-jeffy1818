@@ -3,7 +3,7 @@ USE personaldb;
 
 DROP TABLE IF EXISTS books;
 CREATE TABLE books (
-	id int PRIMARY KEY,
+	id int PRIMARY KEY AUTO_INCREMENT,
     title varchar(24),
     author varchar(48),
     publishYear int,
