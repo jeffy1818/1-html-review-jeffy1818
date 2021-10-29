@@ -2,21 +2,17 @@ const SomeApp = {
     data() {
       return {
         books: [],
-        bookForm: {},
+        booksForm: {}, 
         selectedBook: null
       }
     },
     computed: {},
     methods: {
-        prettyData(d) {
-            return dayjs(d)
-            .format('D MMM YYYY')
-        },
         prettyDollar(n) {
             const d = new Intl.NumberFormat("en-US").format(n);
             return "$ " + d;
         },
-        fetchBooksData() {
+        fetchBookData() {
             fetch('/api/books/')
             .then( response => response.json() )
             .then( (responseJson) => {
@@ -25,34 +21,19 @@ const SomeApp = {
             })
             .catch( (err) => {
                 console.error(err);
+            })
+            .catch( (err) => {
+              console.error(error);
             });
         },
-        postNewBook(evt) {
-            console.log("Posting!", this.bookForm);
-            fetch('api/books/create.php', {
-                method:'POST',
-                body: JSON.stringify(this.bookForm),
-                headers: {
-                  "Content-Type": "application/json; charset=utf-8"
-                }
-              })
-              .then( response => response.json() )
-              .then( json => {
-                console.log("Returned from post:", json);
-                // TODO: test a result was returned!
-                this.books = json;
-                // reset the form
-                this.bookForm = {};
-              });
-        },
         postEditBook(evt) {
-          this.bookForm.id = this.selectedBook.id;     
+          this.booksForm.id = this.selectedBook.id;     
           
-          console.log("Updating!", this.bookForm);
+          console.log("Updating!", this.booksForm);
   
           fetch('api/books/update.php', {
               method:'POST',
-              body: JSON.stringify(this.bookForm),
+              body: JSON.stringify(this.booksForm),
               headers: {
                 "Content-Type": "application/json; charset=utf-8"
               }
@@ -66,14 +47,14 @@ const SomeApp = {
               this.handleResetEditBook();
             });
         },
-        postDeleteBook(book) {
-          if (!confirm("Are you sure you want to delete the book from "+book.title+"?")) {
+        postDeleteBook(bk) {
+          if (!confirm("Are you sure you want to delete the book from "+bk.title+"?")) {
               return;
           }
           
           fetch('api/books/delete.php', {
               method:'POST',
-              body: JSON.stringify(book),
+              body: JSON.stringify(bk),
               headers: {
                 "Content-Type": "application/json; charset=utf-8"
               }
@@ -83,17 +64,18 @@ const SomeApp = {
               console.log("Returned from post:", json);
               // TODO: test a result was returned!
               this.books = json;
+              
               this.handleResetEditBook();
             });
         },
         handleEditBook(book) {
           console.log("selecting", book);
           this.selectedBook = book;
-          this.bookForm = Object.assign({}, this.selectedBook);
+          this.booksForm = Object.assign({}, this.selectedBook);
         },
         handleResetEditBook() {
           this.selectedBook = null;
-          this.bookForm = {};
+          this.booksForm = {};
         },
         postBook(evt) {
           if (this.selectedBook === null) {
@@ -101,13 +83,44 @@ const SomeApp = {
           } else {
               this.postNewBook(evt);
           }
-        }
-    },
-    created() {
-        this.fetchBooksData();
-        // this.postNewBook();
+        },
+        postNewBook(evt) {
+            //this.offerForm.studentId = this.selectedStudent.id;        
+            
+            console.log("Posting:", this.booksForm);
+
+            fetch('api/books/create.php', {
+                method:'POST',
+                body: JSON.stringify(this.booksForm),
+                headers: {
+                  "Content-Type": "application/json; charset=utf-8",
+                }
+              })
+              .then( response => response.json() )
+              .then( json => {
+                console.log("Returned from post:", json);
+                // TODO: test a result was returned!
+                this.books = json;
+                
+                // reset the form
+                this.booksForm = {};
+              });
+          }
+      },
+      created() {
+        this.fetchBookData();
     }
+}
   
-  }
-  
-  Vue.createApp(SomeApp).mount('#SomeApp');
+  Vue.createApp(SomeApp).mount('#offerApp');
+        // fetchUserData(){
+        //     fetch('https://randomuser.me/api/')
+        //     .then( response => response.json() )
+        //     .then( (responseJson) => {
+        //         this.person = responseJson.results[0];
+        //     })
+        //     .catch( (err) => {
+        //         console.error(err);
+        //     })
+        //     }
+        

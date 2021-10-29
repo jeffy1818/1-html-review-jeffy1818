@@ -1,99 +1,105 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link href="css/styles.css" rel="stylesheet" type="text/css">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <title>D&S HW #1: Git & HTML Review Books Page</title>
+  <link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="iu.html">School</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="books.html">Books</a>
+      </li>
+    </ul>
+  </nav>
+  <br> 
+  <div id="offerApp">       
+    <table id="taskTable"class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Year Published</th>
+            <th scope="col">Publisher</th>
+            <th scope="col">Page Count</th>
+            <th scope="col">MSRP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="bk in books">
+            <td>{{ bk.title }}</td>
+            <td>{{ bk.author }}</td>
+            <td>{{ bk.year_published }}</td>
+            <td>{{ bk.publisher }}</td>
+            <td>{{ bk.pagenumber }}</td>
+            <td>{{ prettyDollar(bk.msrp) }}</td>
+            <td>
+              <button type="button" class="btn btn-outline-secondary btn-sm"
+                v-on:click="handleEditBook(bk)">Edit</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm"
+                v-on:click="postDeleteBook(bk)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>{{selectedBook === null ? "Add " : "Edit " }}Book</h2>
+    <form v-on:submit.prevent="postBook">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" v-model="booksForm.title" class="form-control" id="title" placeholder="Book Title" name="title">
+    </div>
+    <div class="form-group">
+      <label for="author">Author:</label>
+      <input type="text" v-model="booksForm.author" class="form-control" id="author" placeholder="Author Name" name="author">
+    </div>
+    <div class="form-group">
+      <label for="publisher">Publisher:</label>
+      <input type="text" v-model="booksForm.publisher" class="form-control" id="publisher" placeholder="Publisher" name="publisher">
+    </div>
+    <div class="form-group">
+      <label for="year_published">Year Published:</label>
+      <input type="number" v-model="booksForm.year_published" class="form-control" id="year_published" placeholder="Year" name="yearpublished">
+    </div>
+    <div class="form-group">
+      <label for="pagenumber">Page Count:</label>
+      <input type="text" v-model="booksForm.pagenumber" class="form-control" id="pagenumber" placeholder="#" name="pagenumber">
+    </div>
+    <div class="form-group">
+      <label for="msrp">MSRP:</label>
+      <input type="text" v-model="booksForm.msrp" class="form-control" id="msrp" placeholder="MSRP" name="msrp">
+    </div>
     
-    <script src="https://unpkg.com/vue@next"></script>
-    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="books.html">Books</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    
+    <button type="submit" class="btn btn-primary">{{ selectedBook === null ? "Add" : "Edit" }} Book</button>
+    <button type="button" class="btn btn-outline-secondary" 
+      v-if="selectedBook"
+      v-on:click="handleResetEditBook">Cancel</button>
+    </form>
+  </div>
+    
+      
+  
 
-    <div id="SomeApp" class="container">
-        <div class="row align-items-start">
-            <h1 id="bookstable">List of Books</h1>  
-            <table class="table">
-            <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Title</th>
-                  <th>Author</th>
-                  <th>Publish Year</th>
-                  <th>Publisher</th>
-                  <th>Page Count</th>
-                  <th>MSRP</th>
-                </tr>
-            </thead>
-                <tbody>
-                    <tr v-for="book in books">
-                        <td>{{ book.id }}</td>
-                        <td>{{ book.title }}</td>
-                        <td>{{ book.author }}</td>
-                        <td>{{ book.publishYear }}</td>
-                        <td>{{ book.publisher }}</td>
-                        <td>{{ book.pageNumber }}</td>
-                        <td>{{ prettyDollar(book.msrp) }}</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-
-      </div>
-
-      <form v-on:submit.prevent="postNewOffer">
-        <div class="mb-3">
-          <label for="companyName" class="form-label">Company Name</label>
-          <input type="text" v-model="offerForm.companyName"
-           class="form-control" id="companyName">
-        </div>
-        <div class="mb-3">
-          <label for="salary" class="form-label">Salary</label>
-          <input type="number" v-model="offerForm.salary" class="form-control" id="salary">
-        </div>
-        <div class="mb-3">
-          <label for="bonus" class="form-label">Bonus</label>
-          <input type="number" v-model="offerForm.bonus" class="form-control" id="bonus">
-        </div>
-        <div class="mb-3">
-          <label for="offerDate" class="form-label">offerDate</label>
-          <input type="date" v-model="offerForm.offerDate" class="form-control" id="offerDate">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+<script src="js/tablesort.min.js"></script>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="js/index.js"></script>
 
 
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-
-    <script src="js/index.js"></script>
-  </body>
-
+<script>
+  // Tablesort plugin from http://tristen.ca/tablesort/demo/ 
+  new Tablesort(document.getElementById('taskTable'));
+</script>
+</body>
 </html>
