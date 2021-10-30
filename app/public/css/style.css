@@ -96,3 +96,7 @@ th[role=columnheader]:not(.no-sort):hover:after {
 #bookstable {
 	color: red !important;
 }
+
+#formtitle {
+	color: white !important; 
+}

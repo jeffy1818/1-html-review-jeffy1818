@@ -62,12 +62,11 @@ const SomeApp = {
               console.log("Returned from post:", json);
               // TODO: test a result was returned!
               this.books = json;
-              
               this.handleResetEditBook();
             });
         },
         postDeleteBook(book) {
-          if (!confirm("Are you sure you want to delete the book from "+book.title+"?")) {
+          if (!confirm("Are you sure you want to delete the book " + "'" + book.title + "'" +"?")) {
               return;
           }
           
@@ -96,7 +95,7 @@ const SomeApp = {
           this.bookForm = {};
         },
         postBook(evt) {
-          if (this.selectedBook === null) {
+          if (this.selectedBook) {
               this.postEditBook(evt);
           } else {
               this.postNewBook(evt);
